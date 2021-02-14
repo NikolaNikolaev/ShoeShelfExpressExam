@@ -17,7 +17,10 @@
             <input type="password" name="repeatPassword" placeholder="Re-password">
         </div>
         <div>
-            {{!-- <p class="message"></p> --}}
+            {{#if error}}
+            <p class="message">{{error.message}}</p>
+            {{/if}}
+
             <button>Register</button>
         </div>
     </form>

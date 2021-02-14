@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        minLength: 3,
     },
     fullName: {
         type: String,
@@ -15,7 +14,6 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 3,
     },
     offersBought: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -30,9 +28,7 @@ userSchema.pre('save', async function (next) {
         const hashPassword = await bcrypt.hash(this.password, salt);
         this.password = hashPassword;
         next();
-    } catch (error) {
-        console.log(error);
-    };
+    } catch (error) { throw { message: error }; };
 });
 
 // •	Email - string (required), unique
