@@ -26,7 +26,17 @@ const login = async ({ email, password }) => {
     } catch (error) { throw error; };
 };
 
+const addShoeOffer = (userId, shoeOfferId) => {
+    return User.findById(userId)
+        .then((user) => {
+            user.offersBought.push(shoeOfferId);
+            return user.save();
+        })
+        .catch(err => { throw err; });
+};
+
 module.exports = {
     register,
     login,
+    addShoeOffer,
 };

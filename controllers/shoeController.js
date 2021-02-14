@@ -25,10 +25,20 @@ router.get('/:shoeOfferId/details', isAuthenticated, async (req, res) => {
     const shoeOffer = await shoeService.getOne(req.params.shoeOfferId);
     const isCreator = (shoeOffer.creator == req.user.email);
     // Check if the user already bought the shoes
-    const hasUserBoughtShoes = (shoeOffer.buyers.some(userId => userId == req.user._id));
+    const hasUserBoughtShoes = (shoeOffer.buyers.find(userId => { return userId == req.user._id }));
+    console.log(hasUserBoughtShoes);
     res.render('../views/shoes/details.hbs', { ...shoeOffer, isCreator, hasUserBoughtShoes });
 });
 
+// Buy Shoes
+router.get('/:shoeOfferId/buy', (req, res) => {
+    shoeService.buyShoes(req.params.shoeOfferId, req.user._id)
+        .then((shoeOffer) => {
+            console.log(shoeOffer);
+            res.redirect(`/shoes/${req.params.shoeOfferId}/details`);
+        })
+        .catch(error => console.log(error));
+});
 
 
 module.exports = router;
