@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const { SALT_ROUNDS } = require('../config/config.js');
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -17,6 +19,17 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ShoeOffer'
     }],
+});
+
+userSchema.pre('save', async function (next) {
+    try {
+        const salt = await bcrypt.genSalt(SALT_ROUNDS);
+        const hashPassword = await bcrypt.hash(this.password, salt);
+        this.password = hashPassword;
+        next();
+    } catch (error) {
+        console.log(error);
+    };
 });
 
 // •	Email - string (required), unique

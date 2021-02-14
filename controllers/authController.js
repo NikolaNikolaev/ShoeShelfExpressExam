@@ -8,6 +8,7 @@ router.get('/register', (req, res) => { res.render('../views/auth/register.hbs')
 router.post('/register', (req, res) => {
     authService.register(req.body)
         .then((user) => {
+            console.log('in then');
             console.log(user);
         })
         .catch(err => {
