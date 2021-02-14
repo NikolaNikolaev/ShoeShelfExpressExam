@@ -26,17 +26,13 @@ router.get('/:shoeOfferId/details', isAuthenticated, async (req, res) => {
     const isCreator = (shoeOffer.creator == req.user.email);
     // Check if the user already bought the shoes
     const hasUserBoughtShoes = (shoeOffer.buyers.find(userId => { return userId == req.user._id }));
-    console.log(hasUserBoughtShoes);
     res.render('../views/shoes/details.hbs', { ...shoeOffer, isCreator, hasUserBoughtShoes });
 });
 
 // Buy Shoes
-router.get('/:shoeOfferId/buy', (req, res) => {
+router.get('/:shoeOfferId/buy', isAuthenticated, (req, res) => {
     shoeService.buyShoes(req.params.shoeOfferId, req.user._id)
-        .then((shoeOffer) => {
-            console.log(shoeOffer);
-            res.redirect(`/shoes/${req.params.shoeOfferId}/details`);
-        })
+        .then(() => { res.redirect(`/shoes/${req.params.shoeOfferId}/details`); })
         .catch(error => console.log(error));
 });
 
