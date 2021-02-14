@@ -1,6 +1,7 @@
 <main>
     <div class="offer-details">
         <h1>{{name}}</h1>
+        
         <div class="info">
             <img src="{{imageUrl}}" alt="{{name}}">
             <div class="description">{{description}}
@@ -11,11 +12,12 @@
                 <p class="price">${{price}}</p>
             </div>
         </div>
+
         <div class="actions">
             {{#if isCreator}}
 
-            <a href="">Edit</a>
-            <a href="">Delete</a>
+            <a href="/shoes/{{_id}}/edit">Edit</a>
+            <a href="/shoes/{{_id}}/delete">Delete</a>
 
             {{else if hasUserBoughtShoes}}
 

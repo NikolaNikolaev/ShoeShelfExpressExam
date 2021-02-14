@@ -36,5 +36,15 @@ router.get('/:shoeOfferId/buy', isAuthenticated, (req, res) => {
         .catch(error => console.log(error));
 });
 
+// Edit Shoe
+router.get('/:shoeOfferId/edit', (req, res) => {
+    shoeService.getOne(req.params.shoeOfferId)
+        .then((shoeOffer) => res.render('../views/shoes/edit.hbs', shoeOffer))
+        .catch(error => console.log(error));
+});
+router.post('/:shoeOfferId/edit', (req, res) => {
+
+});
+
 
 module.exports = router;
