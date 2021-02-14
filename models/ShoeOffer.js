@@ -22,6 +22,9 @@ const shoeOfferSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    creator: {
+        type: String,
+    },
     buyers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
