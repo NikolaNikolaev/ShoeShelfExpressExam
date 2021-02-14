@@ -4,7 +4,8 @@ const routes = require('./routes.js');
 
 const app = express();
 
-require('./config/express.js')(app);
+require('./config/express.js')(app); // Setup Express
+require('./config/mongoose.js'); // Setup Mongoose
 
 app.use(routes);
 
