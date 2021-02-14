@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        minLength: 3,
     },
     fullName: {
         type: String,
@@ -14,6 +15,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+        minLength: 3,
     },
     offersBought: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -21,6 +23,7 @@ const userSchema = new mongoose.Schema({
     }],
 });
 
+// Hash password before save user data
 userSchema.pre('save', async function (next) {
     try {
         const salt = await bcrypt.genSalt(SALT_ROUNDS);

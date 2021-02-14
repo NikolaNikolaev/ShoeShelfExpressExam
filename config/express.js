@@ -1,5 +1,6 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const cookieParser = require('cookie-parser');
 
 const setupExpress = (app) => {
     // Set Static Folder
@@ -9,6 +10,8 @@ const setupExpress = (app) => {
     app.set('view engine', 'hbs');
     // Set Body Parser
     app.use(express.urlencoded({ extended: true }));
+    // Set Cookie Parser
+    app.use(cookieParser());
 };
 
 module.exports = setupExpress;
