@@ -5,19 +5,19 @@
     </p>
     <form action="/auth/register" method="POST">
         <div>
-            <input type="email" name="" placeholder="Email...">
+            <input type="email" name="email" placeholder="Email...">
         </div>
         <div>
-            <input type="text" name="" placeholder="Full name...">
+            <input type="text" name="fullName" placeholder="Full name...">
         </div>
         <div>
-            <input type="password" name="" placeholder="Password">
+            <input type="password" name="password" placeholder="Password">
         </div>
         <div>
-            <input type="password" name="" placeholder="Re-password">
+            <input type="password" name="repeatPassword" placeholder="Re-password">
         </div>
         <div>
-            <p class="message"></p>
+            {{!-- <p class="message"></p> --}}
             <button>Register</button>
         </div>
     </form>
