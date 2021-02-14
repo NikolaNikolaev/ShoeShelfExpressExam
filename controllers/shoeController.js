@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const router = Router();
+
 const shoeService = require('../services/shoeService.js');
+const isAuthenticated = require('../middlewares/isAuthenticated.js');
 
 // Home page
 router.get('/', (req, res) => {
@@ -10,11 +12,21 @@ router.get('/', (req, res) => {
 });
 
 // Create Shoe Offer
-router.get('/create', (req, res) => { res.render('../views/shoes/create'); });
-router.post('/create', (req, res) => {
+router.get('/create', isAuthenticated, (req, res) => { res.render('../views/shoes/create'); });
+router.post('/create', isAuthenticated, (req, res) => {
     shoeService.create(req.body, req.user)
         .then(() => { res.redirect('/shoes'); })
         .catch(error => { res.render('../views/shoes/create.hbs', { error }); });
+});
+
+// Shoe Offer Details
+router.get('/:shoeOfferId/details', isAuthenticated, async (req, res) => {
+    // Check if the user already bought the shoes
+    const shoeOffer = await shoeService.getOne(req.params.shoeOfferId);
+    console.log(shoeOffer);
+    // Check if the user is creator of the shoe offer
+    const isCreator = (shoeOffer.creator == req.user.email);
+    res.render('../views/shoes/details.hbs', { ...shoeOffer, isCreator });
 });
 
 
