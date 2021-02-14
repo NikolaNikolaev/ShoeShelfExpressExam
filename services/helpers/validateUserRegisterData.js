@@ -6,5 +6,5 @@ module.exports = ({ email, password, repeatPassword }) => {
         if (email.length < 3) throw { message: 'Email should contain at least 3 characters' };
         // Check if the password's length is minimum 3 chars
         if (password.length < 3) throw { message: 'Password should contain at least 3 characters' };
-    } catch (err) { throw err; };
+    } catch (error) { throw error; };
 };
