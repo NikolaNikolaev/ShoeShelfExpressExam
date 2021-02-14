@@ -18,10 +18,15 @@ const buyShoes = async (shoeOfferId, userId) => {
     } catch (error) { throw err; };
 };
 
+const updateOne = (shoeOfferId, shoeOfferData) => {
+    return ShoeOffer.findOneAndUpdate({ _id: shoeOfferId }, { ...shoeOfferData, price: shoeOfferData.price.split('$')[1] }, { new: true });
+};
+
 
 module.exports = {
     getAll,
     getOne,
     create,
     buyShoes,
+    updateOne,
 };

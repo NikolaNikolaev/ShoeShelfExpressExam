@@ -3,6 +3,7 @@ const router = Router();
 
 const shoeService = require('../services/shoeService.js');
 const isAuthenticated = require('../middlewares/isAuthenticated.js');
+const { connected } = require('process');
 
 // Home page
 router.get('/', (req, res) => {
@@ -43,7 +44,10 @@ router.get('/:shoeOfferId/edit', (req, res) => {
         .catch(error => console.log(error));
 });
 router.post('/:shoeOfferId/edit', (req, res) => {
-
+    console.log(req.body);
+    shoeService.updateOne(req.params.shoeOfferId, req.body)
+        .then(() => res.redirect(`/shoes/${req.params.shoeOfferId}/details`))
+        .catch(error => console.log(error));
 });
 
 
