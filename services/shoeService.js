@@ -22,6 +22,8 @@ const updateOne = (shoeOfferId, shoeOfferData) => {
     return ShoeOffer.findOneAndUpdate({ _id: shoeOfferId }, { ...shoeOfferData, price: shoeOfferData.price.split('$')[1] }, { new: true });
 };
 
+const deleteOne = (shoeOfferId) => { return ShoeOffer.deleteOne({ _id: shoeOfferId }); };
+
 
 module.exports = {
     getAll,
@@ -29,4 +31,5 @@ module.exports = {
     create,
     buyShoes,
     updateOne,
+    deleteOne,
 };

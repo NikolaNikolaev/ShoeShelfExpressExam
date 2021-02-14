@@ -37,7 +37,7 @@ router.get('/:shoeOfferId/buy', isAuthenticated, (req, res) => {
         .catch(error => console.log(error));
 });
 
-// Edit Shoe
+// Edit Shoe Offer
 router.get('/:shoeOfferId/edit', (req, res) => {
     shoeService.getOne(req.params.shoeOfferId)
         .then((shoeOffer) => res.render('../views/shoes/edit.hbs', shoeOffer))
@@ -50,5 +50,11 @@ router.post('/:shoeOfferId/edit', (req, res) => {
         .catch(error => console.log(error));
 });
 
+// Delete Shoe Offer
+router.get('/:shoeOfferId/delete', (req, res) => {
+    shoeService.deleteOne(req.params.shoeOfferId)
+        .then(() => res.redirect('/shoes'))
+        .catch(error => console.log(error));
+});
 
 module.exports = router;
