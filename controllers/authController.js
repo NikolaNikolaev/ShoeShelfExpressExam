@@ -25,5 +25,10 @@ router.post('/login', async (req, res) => {
     } catch (error) { res.render('../views/auth/login.hbs', { error }); };
 });
 
+// Logout
+router.get('/logout', (req, res) => {
+   res.clearCookie(COOKIE_NAME);
+   res.redirect('/shoes');
+});
 
 module.exports = router;

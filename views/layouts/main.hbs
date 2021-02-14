@@ -20,8 +20,8 @@
                         <img src="/static/images/sneakers.png" alt="Shoe Logo">
                     </a>
                 </li>
-                <li>Welcome, xxx@xx.xxx |
-                    <a href="">Logout</a>
+                <li>Welcome, {{user.email}} |
+                    <a href="/auth/logout">Logout</a>
                 </li>
 
                 {{else}}
