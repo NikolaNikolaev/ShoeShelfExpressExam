@@ -17,6 +17,11 @@
         <div>
             <input type="text" name="brand" placeholder="Brand...">
         </div>
+
+        {{#if error}}
+        <p class="message">{{error.message}}</p>
+        {{/if}}
+
         <div>
             <button>Create</button>
         </div>
