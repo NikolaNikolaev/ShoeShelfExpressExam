@@ -13,12 +13,19 @@
         </div>
         <div class="actions">
             {{#if isCreator}}
+
             <a href="">Edit</a>
             <a href="">Delete</a>
-            {{/if}}
 
-            <!-- <a href="">Buy</a> -->
-            <!-- <span>You bought it</span> -->
+            {{else if hasUserBoughtShoes}}
+
+            <span>You bought it</span>
+
+            {{else}}
+
+            <a href="/shoes/{{_id}}/buy">Buy</a>
+
+            {{/if}}
         </div>
     </div>
 </main>

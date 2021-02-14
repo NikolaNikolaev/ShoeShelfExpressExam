@@ -21,12 +21,12 @@ router.post('/create', isAuthenticated, (req, res) => {
 
 // Shoe Offer Details
 router.get('/:shoeOfferId/details', isAuthenticated, async (req, res) => {
-    // Check if the user already bought the shoes
-    const shoeOffer = await shoeService.getOne(req.params.shoeOfferId);
-    console.log(shoeOffer);
     // Check if the user is creator of the shoe offer
+    const shoeOffer = await shoeService.getOne(req.params.shoeOfferId);
     const isCreator = (shoeOffer.creator == req.user.email);
-    res.render('../views/shoes/details.hbs', { ...shoeOffer, isCreator });
+    // Check if the user already bought the shoes
+    const hasUserBoughtShoes = (shoeOffer.buyers.some(userId => userId == req.user._id));
+    res.render('../views/shoes/details.hbs', { ...shoeOffer, isCreator, hasUserBoughtShoes });
 });
 
 
